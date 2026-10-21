@@ -65,6 +65,53 @@ namespace BWell.Loyalty.Infrastructure.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("BWell.Loyalty.Domain.Entities.BenefitRedemption", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BenefitName")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("FamilyMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("SubscriptionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FamilyMemberId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.ToTable("BenefitRedemptions");
+                });
+
             modelBuilder.Entity("BWell.Loyalty.Domain.Entities.ChronicDisease", b =>
                 {
                     b.Property<Guid>("Id")
@@ -645,6 +692,31 @@ namespace BWell.Loyalty.Infrastructure.Data.Migrations
                     b.HasIndex("SubscriptionId");
 
                     b.ToTable("Visits");
+                });
+
+            modelBuilder.Entity("BWell.Loyalty.Domain.Entities.BenefitRedemption", b =>
+                {
+                    b.HasOne("BWell.Loyalty.Domain.Entities.FamilyMember", "FamilyMember")
+                        .WithMany()
+                        .HasForeignKey("FamilyMemberId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("BWell.Loyalty.Domain.Entities.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BWell.Loyalty.Domain.Entities.Subscription", "Subscription")
+                        .WithMany()
+                        .HasForeignKey("SubscriptionId")
+                        .IsRequired();
+
+                    b.Navigation("FamilyMember");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Subscription");
                 });
 
             modelBuilder.Entity("BWell.Loyalty.Domain.Entities.DeliveryAddress", b =>

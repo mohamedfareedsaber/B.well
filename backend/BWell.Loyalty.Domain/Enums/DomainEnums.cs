@@ -21,6 +21,14 @@ public enum SubscriptionStatus
     Expired = 5
 }
 
+public enum BenefitRedemptionStatus
+{
+    Pending = 1,
+    Approved = 2,
+    Rejected = 3,
+    Completed = 4
+}
+
 public enum PaymentStatus
 {
     Pending = 1,

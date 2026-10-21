@@ -21,6 +21,20 @@
   gap: 12px;
 }
 
+.portal-redeem-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--bw-charcoal);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.portal-redeem-link:hover {
+  color: var(--bw-muted);
+}
+
 .portal-user {
   font-weight: 600;
   font-size: 0.92rem;

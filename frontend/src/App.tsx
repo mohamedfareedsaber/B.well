@@ -9,6 +9,7 @@ import { AdminProgramsPage } from './pages/AdminProgramsPage';
 import { CreateProgramPage } from './pages/CreateProgramPage';
 import { AdminPatientsPage } from './pages/AdminPatientsPage';
 import { PatientPortalPage } from './pages/PatientPortalPage';
+import { BenefitRedemptionPage } from './pages/BenefitRedemptionPage';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/checkout/result" element={<PaymentResultPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/portal" element={<PatientPortalPage />} />
+        <Route path="/portal/redeem" element={<BenefitRedemptionPage />} />
         <Route path="/admin" element={<AdminOverviewPage />} />
         <Route path="/admin/programs" element={<AdminProgramsPage />} />
         <Route path="/admin/programs/new" element={<CreateProgramPage />} />

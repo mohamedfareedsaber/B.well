@@ -64,3 +64,16 @@ public record PortalAddressDto(
     string Governorate,
     string PostalCode,
     string AddressDetails);
+
+public record CreateBenefitRedemptionRequest(
+    string BenefitName,
+    Guid? FamilyMemberId,
+    string? Notes);
+
+public record BenefitRedemptionDto(
+    Guid Id,
+    string BenefitName,
+    string? MemberName,
+    string? Notes,
+    BenefitRedemptionStatus Status,
+    DateTime CreatedAtUtc);

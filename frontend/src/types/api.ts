@@ -171,6 +171,17 @@ export type PatientPortal = {
   } | null;
 };
 
+export type BenefitRedemptionStatus = 'Pending' | 'Approved' | 'Rejected' | 'Completed';
+
+export type BenefitRedemption = {
+  id: string;
+  benefitName: string;
+  memberName?: string | null;
+  notes?: string | null;
+  status: BenefitRedemptionStatus;
+  createdAtUtc: string;
+};
+
 export type DashboardOverview = {
   totalRevenueEgp: number;
   totalSubscriptions: number;

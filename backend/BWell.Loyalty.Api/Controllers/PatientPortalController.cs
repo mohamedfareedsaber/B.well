@@ -32,4 +32,33 @@ public class PatientPortalController : ControllerBase
 
         return Ok(ApiResponse<PatientPortalDto>.Ok(data));
     }
+
+    [HttpGet("benefit-redemptions")]
+    public async Task<ActionResult<ApiResponse<IReadOnlyList<BenefitRedemptionDto>>>> GetBenefitRedemptions(
+        CancellationToken ct)
+    {
+        if (!TryGetUserId(out var userId))
+            return Unauthorized(ApiResponse<IReadOnlyList<BenefitRedemptionDto>>.Fail("Invalid token."));
+
+        var redemptions = await _portal.GetMyBenefitRedemptionsAsync(userId, ct);
+        return Ok(ApiResponse<IReadOnlyList<BenefitRedemptionDto>>.Ok(redemptions));
+    }
+
+    [HttpPost("benefit-redemptions")]
+    public async Task<ActionResult<ApiResponse<BenefitRedemptionDto>>> CreateBenefitRedemption(
+        [FromBody] CreateBenefitRedemptionRequest request,
+        CancellationToken ct)
+    {
+        if (!TryGetUserId(out var userId))
+            return Unauthorized(ApiResponse<BenefitRedemptionDto>.Fail("Invalid token."));
+
+        var redemption = await _portal.CreateBenefitRedemptionAsync(userId, request, ct);
+        return Ok(ApiResponse<BenefitRedemptionDto>.Ok(redemption, "Redemption request submitted."));
+    }
+
+    private bool TryGetUserId(out Guid userId)
+    {
+        var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub");
+        return Guid.TryParse(userIdValue, out userId);
+    }
 }

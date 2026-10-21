@@ -1,5 +1,6 @@
 using BWell.Loyalty.Application.DTOs.Portal;
 using BWell.Loyalty.Application.Interfaces;
+using BWell.Loyalty.Domain.Entities;
 using BWell.Loyalty.Domain.Enums;
 using BWell.Loyalty.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,86 @@ public class PatientPortalService : IPatientPortalService
     private readonly BWellDbContext _db;
 
     public PatientPortalService(BWellDbContext db) => _db = db;
+
+    public async Task<IReadOnlyList<BenefitRedemptionDto>> GetMyBenefitRedemptionsAsync(
+        Guid userId,
+        CancellationToken ct = default)
+    {
+        var patientId = await GetPatientIdAsync(userId, ct);
+        return await _db.BenefitRedemptions
+            .Where(r => r.PatientId == patientId)
+            .OrderByDescending(r => r.CreatedAtUtc)
+            .Select(r => new BenefitRedemptionDto(
+                r.Id,
+                r.BenefitName,
+                r.FamilyMember == null ? "Primary member" : r.FamilyMember.FullName,
+                r.Notes,
+                r.Status,
+                r.CreatedAtUtc))
+            .ToListAsync(ct);
+    }
+
+    public async Task<BenefitRedemptionDto> CreateBenefitRedemptionAsync(
+        Guid userId,
+        CreateBenefitRedemptionRequest request,
+        CancellationToken ct = default)
+    {
+        var patient = await _db.Patients
+            .Include(p => p.Subscriptions)
+                .ThenInclude(s => s.LoyaltyProgram)
+                    .ThenInclude(p => p.Benefits)
+            .Include(p => p.FamilyMembers)
+            .FirstOrDefaultAsync(p => p.AppUserId == userId, ct)
+            ?? throw new UnauthorizedAccessException("Patient profile not found.");
+
+        var subscription = patient.Subscriptions
+            .Where(s => s.Status == SubscriptionStatus.Active)
+            .OrderByDescending(s => s.StartDateUtc)
+            .FirstOrDefault()
+            ?? throw new InvalidOperationException("An active membership is required to redeem benefits.");
+
+        var benefitName = request.BenefitName?.Trim();
+        if (string.IsNullOrWhiteSpace(benefitName) || benefitName.Length > 500)
+            throw new ArgumentException("Choose a valid membership benefit.");
+
+        var benefit = subscription.LoyaltyProgram.Benefits.FirstOrDefault(b =>
+            b.AppliesTo == subscription.PlanType &&
+            string.Equals(b.Text.Trim(), benefitName, StringComparison.OrdinalIgnoreCase));
+        if (benefit is null)
+            throw new ArgumentException("That benefit is not available on your active membership.");
+
+        FamilyMember? familyMember = null;
+        if (request.FamilyMemberId.HasValue)
+        {
+            familyMember = patient.FamilyMembers.FirstOrDefault(m => m.Id == request.FamilyMemberId.Value)
+                ?? throw new ArgumentException("The selected family member is not on your membership.");
+        }
+
+        var notes = request.Notes?.Trim();
+        if (notes?.Length > 1000)
+            throw new ArgumentException("Notes must be 1000 characters or fewer.");
+
+        var redemption = new BenefitRedemption
+        {
+            PatientId = patient.Id,
+            SubscriptionId = subscription.Id,
+            FamilyMemberId = familyMember?.Id,
+            BenefitName = benefit.Text,
+            Notes = string.IsNullOrWhiteSpace(notes) ? null : notes,
+            Status = BenefitRedemptionStatus.Pending
+        };
+
+        _db.BenefitRedemptions.Add(redemption);
+        await _db.SaveChangesAsync(ct);
+
+        return new BenefitRedemptionDto(
+            redemption.Id,
+            redemption.BenefitName,
+            familyMember?.FullName ?? "Primary member",
+            redemption.Notes,
+            redemption.Status,
+            redemption.CreatedAtUtc);
+    }
 
     public async Task<PatientPortalDto?> GetMyPortalAsync(Guid userId, CancellationToken ct = default)
     {
@@ -131,4 +212,13 @@ public class PatientPortalService : IPatientPortalService
             v.DiscountAppliedPercent,
             v.FamilyMember?.FullName ?? "Primary member",
             v.Notes);
+
+    private async Task<Guid> GetPatientIdAsync(Guid userId, CancellationToken ct)
+    {
+        return await _db.Patients
+            .Where(p => p.AppUserId == userId)
+            .Select(p => (Guid?)p.Id)
+            .FirstOrDefaultAsync(ct)
+            ?? throw new UnauthorizedAccessException("Patient profile not found.");
+    }
 }

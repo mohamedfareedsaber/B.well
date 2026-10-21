@@ -1,5 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
-import { Calendar, Heart, LogOut, Users, Wallet } from 'lucide-react';
+import { Calendar, Gift, Heart, LogOut, Users, Wallet } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { Button } from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -22,6 +22,9 @@ export function PatientPortalPage() {
         <div className="container-wide portal-header__inner">
           <BrandLogo />
           <div className="portal-header__actions">
+            <Link to="/portal/redeem" className="portal-redeem-link">
+              <Gift size={16} /> Redeem benefits
+            </Link>
             <span className="portal-user">{data?.fullName ?? 'Patient'}</span>
             <Button
               variant="ghost"

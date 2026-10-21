@@ -22,6 +22,7 @@ public class BWellDbContext : DbContext
     public DbSet<DeliveryAddress> DeliveryAddresses => Set<DeliveryAddress>();
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Visit> Visits => Set<Visit>();
+    public DbSet<BenefitRedemption> BenefitRedemptions => Set<BenefitRedemption>();
     public DbSet<Governorate> Governorates => Set<Governorate>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -137,6 +138,18 @@ public class BWellDbContext : DbContext
             e.HasOne(x => x.MedicalService).WithMany().HasForeignKey(x => x.MedicalServiceId);
             e.HasOne(x => x.Subscription).WithMany().HasForeignKey(x => x.SubscriptionId);
             e.HasOne(x => x.FamilyMember).WithMany().HasForeignKey(x => x.FamilyMemberId).OnDelete(DeleteBehavior.NoAction);
+            e.HasQueryFilter(x => !x.IsDeleted);
+        });
+
+        modelBuilder.Entity<BenefitRedemption>(e =>
+        {
+            e.Property(x => x.BenefitName).HasMaxLength(500).IsRequired();
+            e.Property(x => x.Notes).HasMaxLength(1000);
+            e.HasOne(x => x.Patient).WithMany().HasForeignKey(x => x.PatientId);
+            e.HasOne(x => x.Subscription).WithMany().HasForeignKey(x => x.SubscriptionId)
+                .OnDelete(DeleteBehavior.NoAction);
+            e.HasOne(x => x.FamilyMember).WithMany().HasForeignKey(x => x.FamilyMemberId)
+                .OnDelete(DeleteBehavior.NoAction);
             e.HasQueryFilter(x => !x.IsDeleted);
         });
 

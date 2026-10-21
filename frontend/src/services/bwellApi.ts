@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type {
+  BenefitRedemption,
   CheckoutSession,
   DashboardOverview,
   LoginResponse,
@@ -26,7 +27,7 @@ export const bwellApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Programs', 'Patients', 'Dashboard'],
+  tagTypes: ['Programs', 'Patients', 'Dashboard', 'BenefitRedemptions'],
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, { email: string; password: string }>({
       query: (body) => ({ url: '/api/auth/login', method: 'POST', body }),
@@ -121,6 +122,19 @@ export const bwellApi = createApi({
       query: () => '/api/portal/me',
       transformResponse: (r: { data: PatientPortal }) => r.data,
     }),
+    getMyBenefitRedemptions: builder.query<BenefitRedemption[], void>({
+      query: () => '/api/portal/benefit-redemptions',
+      transformResponse: (r: { data: BenefitRedemption[] }) => r.data,
+      providesTags: ['BenefitRedemptions'],
+    }),
+    requestBenefitRedemption: builder.mutation<
+      BenefitRedemption,
+      { benefitName: string; familyMemberId?: string | null; notes?: string }
+    >({
+      query: (body) => ({ url: '/api/portal/benefit-redemptions', method: 'POST', body }),
+      transformResponse: (r: { data: BenefitRedemption }) => r.data,
+      invalidatesTags: ['BenefitRedemptions'],
+    }),
     getPaymentConfig: builder.query<PaymentConfig, void>({
       query: () => '/api/subscriptions/payment-config',
       transformResponse: (r: { data: PaymentConfig }) => r.data,
@@ -148,5 +162,7 @@ export const {
   useGetPatientsOverviewQuery,
   useGetPatientQuery,
   useGetMyPortalQuery,
+  useGetMyBenefitRedemptionsQuery,
+  useRequestBenefitRedemptionMutation,
   useGetPaymentConfigQuery,
 } = bwellApi;
