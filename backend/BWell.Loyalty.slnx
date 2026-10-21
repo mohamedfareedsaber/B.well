@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BWell.Loyalty.Api/BWell.Loyalty.Api.csproj" />
+  <Project Path="BWell.Loyalty.Application/BWell.Loyalty.Application.csproj" />
+  <Project Path="BWell.Loyalty.Domain/BWell.Loyalty.Domain.csproj" />
+  <Project Path="BWell.Loyalty.Infrastructure/BWell.Loyalty.Infrastructure.csproj" />
+</Solution>

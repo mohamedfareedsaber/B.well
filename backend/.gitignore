@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+appsettings.*.local.json
+appsettings.Paymob.local.json
+.env
+*.user

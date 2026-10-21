@@ -1,0 +1,75 @@
+.stepper {
+  margin-bottom: 1.5rem;
+}
+
+.stepper__bars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 0.85rem;
+}
+
+.stepper__bar {
+  height: 4px;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.stepper__bar.is-on {
+  background: var(--bw-yellow);
+}
+
+.stepper--failed .stepper__bar.is-fail {
+  background: #fca5a5;
+}
+
+.stepper__labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stepper__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--bw-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.stepper__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.stepper__item.is-active .stepper__icon,
+.stepper__item.is-done .stepper__icon {
+  background: var(--bw-yellow);
+  color: #111;
+}
+
+.stepper__item.is-active,
+.stepper__item.is-done {
+  color: #111;
+}
+
+.stepper__item.is-failed .stepper__icon {
+  background: var(--bw-danger);
+  color: #fff;
+}
+
+.stepper__item.is-failed {
+  color: var(--bw-danger);
+}
+
+.stepper__pay-hint {
+  display: none;
+}

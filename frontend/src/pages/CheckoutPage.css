@@ -1,0 +1,272 @@
+.checkout-page {
+  min-height: 100vh;
+  background: var(--bw-bg);
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  padding: 24px 0 48px;
+  align-items: start;
+}
+
+.checkout-plan .text-link {
+  margin-bottom: 12px;
+  display: inline-flex;
+}
+
+.checkout-plan__card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--bw-border);
+  box-shadow: var(--shadow);
+}
+
+.checkout-plan__head {
+  color: #fff;
+  padding: 1.1rem 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.checkout-plan__head h3 {
+  margin: 0;
+}
+
+.checkout-plan__head .price {
+  margin: 0.4rem 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.checkout-plan__head .price span {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.type-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+}
+
+.checkout-plan__body {
+  padding: 1rem 1.15rem 1.2rem;
+}
+
+.checkout-plan__body h4 {
+  margin: 0 0 0.75rem;
+}
+
+.checkout-plan__body ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.checkout-plan__body li {
+  display: flex;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.checkout-form-card {
+  background: #fff;
+  border: 1px solid var(--bw-border);
+  border-radius: 16px;
+  padding: 1.25rem 1.35rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.checkout-form-card__head h2 {
+  margin: 0;
+}
+
+.checkout-form-card__head p {
+  margin: 0.35rem 0 0;
+  color: var(--bw-muted);
+}
+
+.form-block h3 {
+  margin: 0 0 1rem;
+}
+
+.form-block h4 {
+  margin: 1rem 0 0.75rem;
+}
+
+.form-block label {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-block input,
+.form-block select,
+.form-block textarea {
+  border: 1px solid var(--bw-border);
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  background: #f9fafb;
+  font-weight: 500;
+  color: #111;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 1.25rem;
+}
+
+.form-actions.end {
+  justify-content: flex-end;
+}
+
+.form-error {
+  background: var(--bw-danger-soft);
+  color: var(--bw-danger);
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.family-block {
+  border-top: 1px solid var(--bw-border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.family-block__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.family-block__head h4 {
+  margin: 0;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.empty-hint {
+  color: var(--bw-muted);
+  text-align: center;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.family-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.linkish {
+  border: none;
+  background: transparent;
+  color: var(--bw-danger);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.disease-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin-bottom: 1rem;
+}
+
+.check-item {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500 !important;
+}
+
+.help {
+  color: var(--bw-muted);
+  font-size: 0.88rem;
+}
+
+.privacy-box {
+  background: var(--bw-info-soft);
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: #92400e;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.pay-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pay-tabs button {
+  border: 1px solid var(--bw-border);
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.pay-tabs button.is-active {
+  border-color: var(--bw-yellow);
+  box-shadow: 0 0 0 1px var(--bw-yellow);
+}
+
+.order-mini {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0;
+}
+
+.order-mini div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.92rem;
+}
+
+.order-mini .total {
+  color: var(--bw-yellow-dark);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .checkout-layout,
+  .grid-2,
+  .disease-grid,
+  .family-row {
+    grid-template-columns: 1fr;
+  }
+}

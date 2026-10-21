@@ -1,0 +1,86 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand__mark {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.brand--sm .brand__mark {
+  width: 28px;
+  height: 28px;
+}
+
+.brand--lg .brand__mark {
+  width: 56px;
+  height: 56px;
+}
+
+.brand__b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 4px solid #4b5563;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(-40deg);
+}
+
+.brand--inverted .brand__b {
+  border-color: #9ca3af;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.brand__dot {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background: var(--bw-yellow);
+  border-radius: 2px;
+}
+
+.brand--lg .brand__dot {
+  width: 14px;
+  height: 14px;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand__text strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--bw-text);
+}
+
+.brand__text em {
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--bw-yellow);
+  letter-spacing: 0.02em;
+}
+
+.brand--inverted .brand__text strong {
+  color: #fff;
+}
+
+.brand--lg .brand__text strong {
+  font-size: 1.6rem;
+}
+
+.brand--lg .brand__text em {
+  font-size: 1rem;
+}

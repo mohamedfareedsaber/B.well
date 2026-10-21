@@ -1,0 +1,75 @@
+:root {
+  /* B.Well Clinics — Figma tokens */
+  --bw-yellow: #f0b90b;
+  --bw-yellow-dark: #d4a017;
+  --bw-yellow-soft: #fff8e1;
+  --bw-black: #111111;
+  --bw-charcoal: #2b2b2b;
+  --bw-text: #1f1f1f;
+  --bw-muted: #6b7280;
+  --bw-border: #e5e7eb;
+  --bw-bg: #f7f7f8;
+  --bw-white: #ffffff;
+  --bw-success: #16a34a;
+  --bw-danger: #dc2626;
+  --bw-danger-soft: #fef2f2;
+  --bw-info-soft: #fffbeb;
+
+  --tier-platinum: linear-gradient(135deg, #6b4eff 0%, #8b5cf6 55%, #a78bfa 100%);
+  --tier-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+  --tier-silver: linear-gradient(135deg, #64748b 0%, #94a3b8 55%, #cbd5e1 100%);
+  --tier-bronze: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+
+  --font: "Roboto", system-ui, -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
+  --header-h: 72px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--bw-text);
+  background: var(--bw-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.container-wide {
+  width: min(1200px, calc(100% - 32px));
+  margin-inline: auto;
+}

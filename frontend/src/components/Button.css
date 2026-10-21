@@ -1,0 +1,48 @@
+.bw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+}
+
+.bw-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.bw-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.bw-btn--dark {
+  background: var(--bw-charcoal);
+  color: #fff;
+}
+
+.bw-btn--primary,
+.bw-btn--yellow {
+  background: var(--bw-yellow);
+  color: #111;
+}
+
+.bw-btn--danger {
+  background: var(--bw-danger);
+  color: #fff;
+}
+
+.bw-btn--ghost {
+  background: transparent;
+  color: var(--bw-muted);
+}
+
+.bw-btn--outline {
+  background: #fff;
+  color: var(--bw-charcoal);
+  border: 1px solid var(--bw-border);
+}

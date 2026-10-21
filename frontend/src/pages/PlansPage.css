@@ -1,0 +1,89 @@
+.plans-page {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.plans-page__main {
+  padding: 36px 0 56px;
+}
+
+.plans-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.plans-hero h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.plans-hero p {
+  margin: 0;
+  max-width: 640px;
+  color: var(--bw-muted);
+  line-height: 1.5;
+}
+
+.plan-toggle {
+  display: inline-flex;
+  background: #f3f4f6;
+  border-radius: 999px;
+  padding: 4px;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.plan-toggle button {
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--bw-muted);
+  cursor: pointer;
+}
+
+.plan-toggle button.is-active {
+  background: var(--bw-charcoal);
+  color: #fff;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.plans-footnote {
+  text-align: center;
+  color: var(--bw-muted);
+  margin: 28px 0 0;
+}
+
+.state {
+  text-align: center;
+  color: var(--bw-muted);
+}
+
+.state.error {
+  color: var(--bw-danger);
+}
+
+@media (max-width: 1100px) {
+  .plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+}
